@@ -8,6 +8,7 @@ from shable import model
 from shable.controllers.secure import SecureController
 from tgext.admin.mongo import BootstrapTGMongoAdminConfig as TGAdminConfig
 from tgext.admin.controller import AdminController
+from shable.controllers.user_profile.controller import UserProfileController
 
 from shable.lib.base import BaseController
 from shable.controllers.error import ErrorController
@@ -33,6 +34,7 @@ class RootController(BaseController):
     admin = AdminController(model, None, config_type=TGAdminConfig)
 
     error = ErrorController()
+    user_profile = UserProfileController()
 
     def _before(self, *args, **kw):
         tmpl_context.project_name = "shable"

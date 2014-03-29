@@ -100,6 +100,35 @@ class User(MappedClass):
     password = PasswordProperty(s.String)
     created = FieldProperty(s.DateTime, if_missing=datetime.now)
 
+    location = FieldProperty({
+        'description': s.String(),
+        'address': s.String(),
+        'number': s.String(),
+        'city': s.String(),
+        'zip_code': s.String(),
+        'photos': [],
+        'food_types': [],
+        'preferences': [],
+        'feedback': [{
+            'comment': s.String(),
+            'rates': [{
+                'name': s.String(),
+                'rate': s.Int()
+            }]
+        }],
+        'details': s.Anything()
+    })
+    avatar = FieldProperty(s.Anything)
+    feedback = FieldProperty([{
+        'comment': s.String(),
+        'rates': [{
+            'name': s.String(),
+            'rate': s.Int()
+        }]
+    }])
+    preferences = []
+    details = FieldProperty(s.Anything)
+
     @property
     def permissions(self):
         return Permission.query.find(dict(_groups={'$in':self._groups})).all()
