@@ -92,14 +92,14 @@ class User(MappedClass):
     _id = FieldProperty(s.ObjectId)
     user_name = FieldProperty(s.String)
     email_address = FieldProperty(s.String)
-    display_name = FieldProperty(s.String)
 
     _groups = ForeignIdProperty(Group, uselist=True)
     groups = RelationProperty(Group)
 
     password = PasswordProperty(s.String)
     created = FieldProperty(s.DateTime, if_missing=datetime.now)
-
+    name = FieldProperty(s.String)
+    surname = FieldProperty(s.String)
     gender = FieldProperty(s.String)
     location = FieldProperty({
         'description': s.String(),
@@ -130,6 +130,9 @@ class User(MappedClass):
     }])
     details = FieldProperty(s.Anything)
 
+    @property
+    def display_name(self):
+        return '%s %s' % (self.name, self.surname)
     @property
     def permissions(self):
         return Permission.query.find(dict(_groups={'$in':self._groups})).all()

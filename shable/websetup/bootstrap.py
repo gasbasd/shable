@@ -21,16 +21,26 @@ def bootstrap(command, conf, vars):
 
     u = model.User()
     u.user_name = 'manager'
-    u.display_name = 'Example manager'
-    u.email_address = 'manager@somedomain.com'
+    u.name = 'Example'
+    u.surname = 'manager'
+    u.email_address = 'manager@shable.co'
     u.groups = [g]
     u.password = 'managepass'
 
     u1 = model.User()
-    u1.user_name = 'editor'
-    u1.display_name = 'Example editor'
-    u1.email_address = 'editor@somedomain.com'
-    u1.password = 'editpass'
+    u1.user_name = 'gasba'
+    u1.name = 'Simone'
+    u1.surname = 'Gasbarroni'
+    u1.email_address = 'gas@shable.co'
+    u1.password = '123'
+
+    u1 = model.User()
+    u1.user_name = 'user'
+    u1.name = 'Example'
+    u1.surname = 'User'
+    u1.email_address = 'user@shable.co'
+    u1.password = '123'
+
 
     model.DBSession.flush()
     model.DBSession.clear()
