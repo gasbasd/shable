@@ -38,6 +38,7 @@ install_requires=[
     "ming>=0.4.3",
     "repoze.who",
     "tw2.forms",
+    "tw2.core >= 2.2.1",
     "tgext.admin >= 0.6.1",
     "formencode>=1.3.0a1",
     ]
