@@ -1,8 +1,9 @@
+import datetime
 from tg import expose, request, lurl, flash
 from tw2.forms import ListForm, TextField, SubmitButton, SingleSelectField, CalendarDatePicker
 from shable.lib.base import BaseController
-from shable.lib.utils import coordinate
-from shable.model import User
+from shable.lib.utils import coordinate, earth_radius_km
+from shable.model import User, Meal
 
 
 class SearchForm(ListForm):
@@ -20,7 +21,7 @@ class SearchResultForm(ListForm):
     css_class = 'shable-form'
 
     place = TextField(label='', placeholder='Dove', css_class='form-control')
-    quando = TextField(label='', placeholder='Quando', css_class='form-control')
+    when = TextField(label='', placeholder='Quando', css_class='form-control')
 
     submit = None
     action = lurl('/search/results')
@@ -37,13 +38,27 @@ class SearchController(BaseController):
 
     @expose('shable.templates.results')
     def query(self, **kw):
+
         position = coordinate(kw.get('place'))
 
-        answer = User.query.find({})
+        if kw.get('when'):
+            date = datetime.datetime.strptime(kw.get('when'),"%m/%d/%Y")
 
+        else:
+            date = datetime.datetime.utcnow()
+        if kw.get('guests'):
+            eater = int(kw.get('guests'))
+        else:
+            eater = 1
+        search_results = [u.user_id for u in Meal.query.find({'availability':{'$gte': eater},'date' :{'$gte': date} }).all()]
+
+        users = User.query.find({'_id': {'$in': search_results},
+                                 'position': {'$geoWithin':
+                                                  {'$centerSphere': [position, 10 / earth_radius_km] }} }).all()
 
         flash("Query done")
-        return {'form': SearchResultForm, 'value': {}}
+        print  users
+        return {'form': SearchResultForm, 'value': users}
 
 
 

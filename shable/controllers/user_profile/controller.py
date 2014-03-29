@@ -1,5 +1,3 @@
-# coding=utf-8
-from __future__ import unicode_literals
 from axf.widgets.ajax_manage_photos import AjaxManagePhotos
 
 from tg import predicates, expose, lurl, redirect, request, flash
