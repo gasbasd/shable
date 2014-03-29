@@ -6,11 +6,19 @@
 
 <head>
     <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/photo_upload.css')}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/user_profile.css')}" />
     <title>Shable - Profilo Utente</title>
 </head>
 <body>
 <div class="row">
-    <div class="col-md-offset-2 col-md-8">
+    <div class="col-md-3">
+        <div class="user-profile-avatar" style="background-image: url('${h.user_avatar()}');"></div>
+        <div>${h.user_info().display_name}</div>
+        <div><a href="${tg.url('/user_profile')}">Informazioni Utente</a></div>
+        <div><a href="${tg.url('/user_profile/location')}">Informazioni Tavola</a></div>
+        <div></div>
+    </div>
+    <div class="col-md-6">
         ${form.display(value=value)}
     </div>
 </div>

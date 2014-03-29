@@ -5,6 +5,9 @@
 #from webhelpers import date, feedgenerator, html, number, misc, text
 from markupsafe import Markup
 from datetime import datetime
+from tg import request
+import tg
+
 
 def current_year():
   now = datetime.now()
@@ -12,3 +15,10 @@ def current_year():
 
 def icon(icon_name):
     return Markup('<i class="glyphicon glyphicon-%s"></i>' % icon_name)
+
+def user_avatar():
+    user = request.identity['user']
+    return tg.url(user.avatar[0].url, qualified=True)
+
+def user_info():
+    return request.identity['user']
