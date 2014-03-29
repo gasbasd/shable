@@ -30,6 +30,7 @@ class NewMealForm(ListForm):
     end_hour = SingleSelectField(label='FINE', css_class='form-control small-single-select', options=HOURS)
     end_minute = SingleSelectField(label=None, css_class='form-control small-single-select', options=MINUTES,
                                    container_attrs={'class': 'single-select-hack'})
+    price = TextField(label='PREZZO', css_class='form-control')
     availability = TextField(label='DISPONIBILITA\'', css_class='form-control')
     specific_meal = SingleSelectField(label='PASTO SPECIFICO', css_class='form-control', options=SPECIFIC_MEAL)
     photos = AjaxManagePhotos(label='FOTO', css_class="ajax_manage_photos",
@@ -49,6 +50,7 @@ class ManageMealsController(BaseController):
 
     @expose('shable.templates.user_profile.new_meal')
     def new(self):
+        self.photos.new_bucket()
         return {'form': NewMealForm}
 
     @validate(NewMealForm, error_handler=new)
@@ -59,12 +61,12 @@ class ManageMealsController(BaseController):
         values = kw
         values['photos'] = bucket.photos
         values['availability'] = int(values['availability'])
+        values['price'] = float(values['price'])
         print values
-        start_time = {'hour', 'minute'}
-        values['start_time']['hour'] = values.pop('start_hour')
-        values['start_time']['minute'] = values.pop('start_minute')
-        values['end_time']['hour'] = values.pop('end_hour')
-        values['end_time']['minute'] = values.pop('end_minute')
+        start_time = {'hour': int(values.pop('start_hour')), 'minute': int(values.pop('start_minute'))}
+        end_time = {'hour': int(values.pop('end_hour')), 'minute': int(values.pop('end_minute'))}
+        values['start_time'] = start_time
+        values['end_time'] = end_time
         print values
         meal = models.Meal(**values)
         user._meals.append(meal._id)

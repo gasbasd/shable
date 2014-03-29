@@ -28,14 +28,8 @@ class Meal(MappedClass):
     description = FieldProperty(s.String)
     menu = FieldProperty(s.String)
     date = FieldProperty(s.DateTime)
-    start_time = {
-        'hour': s.Int,
-        'minute': s.Int
-    }
-    end_time = {
-        'hour': s.Int,
-        'minute': s.Int
-    }
+    start_time = FieldProperty(s.Anything)
+    end_time = FieldProperty(s.Anything)
     price = FieldProperty(s.Float)
     availability = FieldProperty(s.Int)
     specific_meal = FieldProperty(s.String)
