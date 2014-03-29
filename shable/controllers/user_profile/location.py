@@ -14,11 +14,11 @@ class LocationProfileForm(ListForm):
     number = TextField(label='Numero', css_class='form-control')
     city = TextField(label='Città', css_class='form-control')
     zip_code = TextField(label='CAP', css_class='form-control')
-    food_types = CheckBoxList(label='Preferenze cibi',  options = FOOD_TYPES)
-    preferences = CheckBoxList(label='Preferenze alimentazione',  options = LOCATION_PREFERENCES)
+    food_types = CheckBoxList(label='Preferenze cibi', options=FOOD_TYPES, css_class='chbx-list')
+    preferences = CheckBoxList(label='Preferenze alimentazione', options=LOCATION_PREFERENCES, css_class='chbx-list')
     #add a photo
 
-    submit = SubmitButton(value='Salva Location', css_class='form-control')
+    submit = SubmitButton(value='Salva Tavola', css_class='form-control')
     action = lurl('/user_profile/location/update_details')
 
 
