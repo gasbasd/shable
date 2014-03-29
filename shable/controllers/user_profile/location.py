@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from tg import expose, lurl, predicates, redirect, flash, request
 from tw2.forms import ListForm, TextField, SingleSelectField, SubmitButton, TextArea, CheckBoxList
 from shable.lib.base import BaseController
+from shable.model.models import FOOD_TYPES, LOCATION_PREFERENCES
 
 
 class LocationProfileForm(ListForm):
@@ -13,8 +14,8 @@ class LocationProfileForm(ListForm):
     number = TextField(label='Numero', css_class='form-control')
     city = TextField(label='Città', css_class='form-control')
     zip_code = TextField(label='CAP', css_class='form-control')
-    food_types = CheckBoxList(label='Preferenze cibi', css_class='form-control',  options = ['Pasta', 'Carne', 'Pizza', 'Desert', 'Birra'])
-    preferences = CheckBoxList(label='Preferenze alimentazione', css_class='form-control',  options = ['Vegano', 'No glutine'])
+    food_types = CheckBoxList(label='Preferenze cibi', css_class='form-control',  options = FOOD_TYPES)
+    preferences = CheckBoxList(label='Preferenze alimentazione', css_class='form-control',  options = LOCATION_PREFERENCES)
     #add a photo
 
     submit = SubmitButton(value='Salva Location', css_class='form-control')
@@ -54,8 +55,6 @@ class LocationProfileController(BaseController):
         else:
             user.location.preferences = []
 
-
-
-        flash('Location salvata')
+        flash('Tavolalvata')
         redirect('/user_profile/location')
 
