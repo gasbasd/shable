@@ -59,7 +59,10 @@ class SearchController(BaseController):
 
         flash("Query done")
         print  users
+        geo_points_json = []
+        geo_points_json.append(position)
         geo_points_json = []#[ u.location.position for u in users ]
+
         geo_points_json.append([ 7, 43])
         geo_points_json.append([7.33, 43.33])
 
