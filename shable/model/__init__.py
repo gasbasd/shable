@@ -23,4 +23,5 @@ def init_model(engine):
 
 # Import your model modules here.
 from shable.model.auth import User, Group, Permission
+from shable.model.temporary_photos import TemporaryPhotosBucket
 
