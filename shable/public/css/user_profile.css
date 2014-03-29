@@ -5,3 +5,12 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+.small-single-select{
+    width: 75px !important;
+}
+
+.single-select-hack {
+    margin-left: 80px;
+    margin-top: -54px;
+}

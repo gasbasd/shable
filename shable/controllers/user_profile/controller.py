@@ -5,6 +5,7 @@ from axf.widgets.ajax_manage_photos import AjaxManagePhotos
 from tg import predicates, expose, lurl, redirect, request, flash
 from tw2.forms import TableForm, ListForm, TextField, SingleSelectField, SubmitButton
 from shable.controllers.user_profile.location import LocationProfileController
+from shable.controllers.user_profile.meals import ManageMealsController
 from shable.controllers.utils.temporary_photos import TemporaryPhotosUploader
 from shable.lib.base import BaseController
 from shable.lib.utils import json_lurl
@@ -15,19 +16,20 @@ class UserProfileForm(ListForm):
     name = TextField(label='NOME', css_class='form-control')
     surname = TextField(label='COGNOME', css_class='form-control')
     gender = SingleSelectField(label='SESSO', css_class='form-control', options=['M', 'F'])
-    submit = SubmitButton(value='Salva Profilo', css_class='form-control')
     avatar = AjaxManagePhotos(label='AVATAR', css_class="ajax_manage_photos",
                               action=json_lurl('/user_profile/photos/save'),
                               delete_action=json_lurl('/user_profile/photos/remove'),
                               permit_upload=True)
+    submit = SubmitButton(value='Salva Profilo', css_class='form-control')
     action = lurl('/user_profile/update_profile')
 
 
 class UserProfileController(BaseController):
     allow_only = predicates.not_anonymous()
     location = LocationProfileController()
-    photos = TemporaryPhotosUploader()
+    meals = ManageMealsController()
 
+    photos = TemporaryPhotosUploader()
 
     @expose('shable.templates.user_profile.index')
     def index(self):

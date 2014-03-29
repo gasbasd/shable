@@ -7,7 +7,7 @@
 <head>
     <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/photo_upload.css')}" />
     <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/user_profile.css')}" />
-    <title>Shable - Pannello Profilo Utente</title>
+    <title>Shable - Gestione Pasti</title>
 </head>
 <body>
 <div class="row">
@@ -17,9 +17,10 @@
         <div><a href="${tg.url('/user_profile')}">Informazioni Utente</a></div>
         <div><a href="${tg.url('/user_profile/location')}">Informazioni Tavola</a></div>
         <div><a href="${tg.url('/user_profile/meals')}">Gestione Pasti</a></div>
+        <div></div>
     </div>
     <div class="col-md-6">
-        ${form.display(value=value)}
+        <div class="btn-block"><a href="${tg.url('/user_profile/meals/new')}">Nuovo Pasto</a></div>
     </div>
 </div>
 </body>

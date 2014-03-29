@@ -11,6 +11,8 @@ though.
 import os
 from datetime import datetime
 from hashlib import sha256
+from shable.model.models import Meal
+
 __all__ = ['User', 'Group', 'Permission']
 
 from ming import schema as s
@@ -128,6 +130,8 @@ class User(MappedClass):
             'rate': s.Int()
         }]
     }])
+    _meals = ForeignIdProperty(Meal, uselist=True)
+    meals = RelationProperty(Meal)
     details = FieldProperty(s.Anything)
 
     @property
