@@ -43,7 +43,7 @@ class UserProfileController(BaseController):
             # Rendering a new upload form, start with empty photos bucket
             self.photos.new_bucket()
             value = {'name': user.name, 'surname': user.surname, 'gender': user.gender,
-                     'avatar': {'photos': self.photos.recover_photos(user.avatar)}}
+                     'avatar': {'photos': self.photos.recover_photos(getattr(user, 'avatar', None))}}
 
         return {'form': UserProfileForm, 'value': value}
 
