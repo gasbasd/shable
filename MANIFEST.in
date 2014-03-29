@@ -1,0 +1,4 @@
+recursive-include shable/public *
+include shable/public/favicon.ico
+recursive-include shable/i18n *
+recursive-include shable/templates *
