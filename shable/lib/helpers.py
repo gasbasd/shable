@@ -20,6 +20,8 @@ def user_avatar():
     user = request.identity['user']
     if getattr(user, 'avatar', None) is None:
         return 'http://placehold.it/180x180'
+    if len(user.avatar) < 1:
+        return 'http://placehold.it/180x180'
     return tg.url(user.avatar[0].url, qualified=True)
 
 def user_info():

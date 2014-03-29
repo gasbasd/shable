@@ -39,3 +39,4 @@ class Meal(MappedClass):
     price = FieldProperty(s.Float)
     availability = FieldProperty(s.Int)
     specific_meal = FieldProperty(s.String)
+    photos = FieldProperty(s.Anything)

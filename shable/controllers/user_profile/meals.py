@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from datetime import datetime
 
 from axf.widgets.ajax_manage_photos import AjaxManagePhotos
-from tg import expose, lurl, redirect, request
+from tg import expose, lurl, redirect, request, validate
 from tw2.core import DateTimeValidator
 from tw2.forms import ListForm, TextField, SingleSelectField, SubmitButton, TextArea, CalendarDatePicker
 from shable.controllers.utils.temporary_photos import TemporaryPhotosUploader
@@ -17,7 +17,7 @@ class NewMealForm(ListForm):
     css_class = 'shable-form'
     name = TextField(label='NOME', css_class='form-control')
     description = TextArea(label='DESCRIZIONE', css_class='form-control')
-    menu = TextArea(label='DESCRIZIONE', css_class='form-control')
+    menu = TextArea(label='MENU', css_class='form-control')
     date = CalendarDatePicker(label='DATA',
                               validator=DateTimeValidator(format='%d/%m/%Y', required=True,
                                                           min=datetime.strptime('1/1/1970', '%d/%m/%Y')),
@@ -51,10 +51,22 @@ class ManageMealsController(BaseController):
     def new(self):
         return {'form': NewMealForm}
 
+    @validate(NewMealForm, error_handler=new)
     @expose()
     def create(self, **kw):
         user = request.identity['user']
         bucket = self.photos.get_bucket()
-        meal = models.Meal(**kw)
-        user.meals.append(meal)
+        values = kw
+        values['photos'] = bucket.photos
+        values['availability'] = int(values['availability'])
+        print values
+        start_time = {'hour', 'minute'}
+        values['start_time']['hour'] = values.pop('start_hour')
+        values['start_time']['minute'] = values.pop('start_minute')
+        values['end_time']['hour'] = values.pop('end_hour')
+        values['end_time']['minute'] = values.pop('end_minute')
+        print values
+        meal = models.Meal(**values)
+        user._meals.append(meal._id)
+
         redirect('/user_profile/meals')
