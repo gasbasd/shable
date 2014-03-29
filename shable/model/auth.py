@@ -100,6 +100,7 @@ class User(MappedClass):
     password = PasswordProperty(s.String)
     created = FieldProperty(s.DateTime, if_missing=datetime.now)
 
+    gender = FieldProperty(s.String)
     location = FieldProperty({
         'description': s.String(),
         'address': s.String(),
@@ -127,7 +128,6 @@ class User(MappedClass):
             'rate': s.Int()
         }]
     }])
-    preferences = []
     details = FieldProperty(s.Anything)
 
     @property
