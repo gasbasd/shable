@@ -116,7 +116,8 @@ class User(MappedClass):
                 'rate': s.Int()
             }]
         }],
-        'details': s.Anything()
+        'details': s.Anything(),
+        'position': [s.Float()],
     })
     avatar = FieldProperty(s.Anything)
     feedback = FieldProperty([{
