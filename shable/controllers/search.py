@@ -4,6 +4,7 @@ from tw2.forms import ListForm, TextField, SubmitButton, SingleSelectField, Cale
 from shable.lib.base import BaseController
 from shable.lib.utils import coordinate, earth_radius_km
 from shable.model import User, Meal
+import json
 
 
 class SearchForm(ListForm):
@@ -58,7 +59,12 @@ class SearchController(BaseController):
 
         flash("Query done")
         print  users
-        return {'form': SearchResultForm, 'value': users}
+        geo_points_json = []#[ u.location.position for u in users ]
+        geo_points_json.append([ 7, 43])
+        geo_points_json.append([7.33, 43.33])
+
+        return dict(form=SearchResultForm, value= users, geo_points_json=json.dumps(geo_points_json))
+
 
 
 
