@@ -18,6 +18,8 @@ def icon(icon_name):
 
 def user_avatar():
     user = request.identity['user']
+    if not user.avatar:
+        return 'http://placehold.it/180x180'
     return tg.url(user.avatar[0].url, qualified=True)
 
 def user_info():
