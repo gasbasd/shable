@@ -41,6 +41,8 @@ install_requires=[
     "tw2.core >= 2.2.1",
     "tgext.admin >= 0.6.1",
     "formencode>=1.3.0a1",
+    "tgext.datahelpers",
+    "axf"
     ]
 
 setup(

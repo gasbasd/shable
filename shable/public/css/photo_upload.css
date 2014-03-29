@@ -1,0 +1,61 @@
+.ajax_manage_photos .photo-picture,
+.ajax_manage_photos .photo {
+    width: 128px;
+    height: 128px;
+}
+
+.ajax_manage_photos .photo {
+    position: relative;
+    overflow: hidden;
+    background-color:#ffffff;
+    border:1px solid #dddddd;
+    -webkit-transition:all 0.2s ease-in-out;
+    transition:all 0.2s ease-in-out;
+    display:inline-block;
+    vertical-align: top;
+    margin: 10px;
+}
+
+.ajax_manage_photos .photo img {
+    min-width: 100%;
+    min-height: 100%;
+    height: 100%;
+}
+
+.ajax_manage_photos .photo-delete {
+    z-index: 1;
+    position: absolute;
+    background-color: white;
+    right: 3px;
+    top: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 3px solid #666;
+    border-radius: 50% 50%;
+    cursor: pointer;
+    line-height: 20px;
+    width: 25px;
+    text-align: center;
+}
+
+.ajax_manage_photos .photo-picture:hover img {
+    opacity: 0.3;
+}
+
+.ajax_manage_photos .photo-picture:hover {
+    background: url('../img/image_upload.png') no-repeat center;
+    cursor: pointer;
+}
+
+.ajax_manage_photos .photo .photo-delete {
+    display: none;
+}
+
+.ajax_manage_photos .photo:hover .photo-delete {
+    display: block;
+}
+
+.ajax_manage_photos .photo-upload {
+    background: url('../img/image_add.png') no-repeat center;
+    cursor: pointer;
+}
