@@ -9,6 +9,7 @@ from shable.controllers.secure import SecureController
 from tgext.admin.mongo import BootstrapTGMongoAdminConfig as TGAdminConfig
 from tgext.admin.controller import AdminController
 from shable.controllers.user_profile.controller import UserProfileController
+from shable.controllers.view_meal import ViewMealController
 
 from shable.lib.base import BaseController
 from shable.controllers.error import ErrorController
@@ -35,6 +36,7 @@ class RootController(BaseController):
 
     error = ErrorController()
     user_profile = UserProfileController()
+    view_meal = ViewMealController()
 
     def _before(self, *args, **kw):
         tmpl_context.project_name = "shable"

@@ -46,7 +46,8 @@ class ManageMealsController(BaseController):
 
     @expose('shable.templates.user_profile.meals')
     def index(self):
-        return {}
+        user = request.identity['user']
+        return {'meals': user.meals}
 
     @expose('shable.templates.user_profile.new_meal')
     def new(self):
@@ -59,15 +60,14 @@ class ManageMealsController(BaseController):
         user = request.identity['user']
         bucket = self.photos.get_bucket()
         values = kw
+        values['user_id'] = user._id
         values['photos'] = bucket.photos
         values['availability'] = int(values['availability'])
         values['price'] = float(values['price'])
-        print values
         start_time = {'hour': int(values.pop('start_hour')), 'minute': int(values.pop('start_minute'))}
         end_time = {'hour': int(values.pop('end_hour')), 'minute': int(values.pop('end_minute'))}
         values['start_time'] = start_time
         values['end_time'] = end_time
-        print values
         meal = models.Meal(**values)
         user._meals.append(meal._id)
 

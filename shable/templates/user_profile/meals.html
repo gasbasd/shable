@@ -21,6 +21,26 @@
     </div>
     <div class="col-md-6">
         <div class="btn-block"><a href="${tg.url('/user_profile/meals/new')}">Nuovo Pasto</a></div>
+        <table class="table table-bordered recap-table">
+            <tr>
+                <th>Pasto</th>
+                <th class="edit-header">Elimina</th>
+            </tr>
+            <py:for each="meal in meals">
+                <tr>
+                    <td>${meal.name}</td>
+                    <td style="width: 100px">
+                        <ul>
+                            <li><a href="${tg.url('/user_profile/meals/delete',
+                                 params=dict(meal_id=meal._id))}"
+                                   onclick="return confirm('Procedere alla cancellazione?')" title="Elimina Pasto">
+                                <span class="glyphicon glyphicon-trash"></span></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </py:for>
+        </table>
     </div>
 </div>
 </body>

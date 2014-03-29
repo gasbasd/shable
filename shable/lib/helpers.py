@@ -26,3 +26,6 @@ def user_avatar():
 
 def user_info():
     return request.identity['user']
+
+def meal_image(meal):
+    return tg.url(meal.photos[0].url, qualified=True)

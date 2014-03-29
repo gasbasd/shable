@@ -14,3 +14,9 @@
     margin-left: 80px;
     margin-top: -54px;
 }
+
+.recap-table ul li {
+    list-style: none;
+    float:left;
+    margin-right: 20px;
+  }

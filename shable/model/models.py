@@ -34,3 +34,4 @@ class Meal(MappedClass):
     availability = FieldProperty(s.Int)
     specific_meal = FieldProperty(s.String)
     photos = FieldProperty(s.Anything)
+    user_id = FieldProperty(s.Anything)

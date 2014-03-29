@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="master.html" />
+
+<head>
+    <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/view_meal.css')}" />
+    <title>Shable - Visualizza Pasto</title>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-5">
+        <div class="deal_image" style="background-image: url('${h.meal_image(meal)}');"></div>
+    </div>
+    <div class="col-md-5 col-md-offset-2">
+        <p>${meal.description}</p>
+        <h2>MENÙ</h2>
+        <p>${meal.menu}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+
+    </div>
+</div>
+</body>
+</html>
