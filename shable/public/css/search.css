@@ -36,7 +36,7 @@
     border:1px solid #3e2d21;
 }
 .search-result-container{
-    height: 220px;
+    height: 240px;
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 5px;
@@ -59,4 +59,12 @@
 
 ul{
     padding-left: 0px;
+}
+
+.go-meal{
+    background-color: #cc3333 !important;
+    color: #ffffff;
+    border: none;
+    height: 34px;
+    border-radius: 8px;
 }

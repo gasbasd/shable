@@ -14,7 +14,7 @@
         <div class="deal_image" style="background-image: url('${h.meal_image(meal)}');"></div>
     </div>
     <div class="col-md-7 col-md-offset-1 container-background">
-        <h2>IL MENÙ</h2>
+        <h2>${meal.name}</h2>
         <p>${meal.menu}</p>
         <p>${meal.description}</p>
         <ul>
@@ -50,10 +50,8 @@
                 <li><b>Preferenze Alimentari: </b>
                     <span py:for="food in user.location.food_types">${food} - </span></li>
             </ul>
-
         </div>
-
-        <div class="col-md-12">
+        <div py:if="len(user.location.feedback)>0" class="col-md-12">
             <h2 style="text-align: center; width: 100%;">FEEDBACK</h2>
             <div py:for="feed in user.location.feedback" style="height: 120px">
                 <div class="container-background"  style="height: 92%;width: 100%;padding-top: 5px;">
@@ -75,7 +73,6 @@
                         <p>${feed.comment}</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

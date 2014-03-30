@@ -41,11 +41,8 @@
 
 <!-- CHECK ELEMENT ID also UPDATE CSS -->
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-10 col-md-offset-1">
         <div id="map_canvas"></div>
-    </div>
-    <div class="col-md-5 col-md-offset-1">
-        ${form.display(value=value)}
     </div>
 </div>
 <br/>
@@ -65,15 +62,19 @@
                         <li><b>Alle: </b>${meal.end_time.hour}:${meal.start_time.minute}</li>
                         <li><b>Indirizzo: </b>${user.location.address} ${user.location.number}, ${user.location.city}</li>
                     </ul>
+                    <a href="${tg.url('/view_meal', params={'id':str(meal._id)})}"><button class="btn go-meal">
+                        VISUALIZZA IL PASTO
+                    </button></a>
                 </div>
                 <div class="col-md-2" style="font-size: 12px; padding-top: 20px">
-                    <p>Ultimi feedback</p>
-                    <ul>
-                        <li py:for="rate in user.location.feedback[1].rates">
-                            <span>${rate[0]}</span>
-                            <span py:for="i in range(int(rate[1]))" class="glyphicon glyphicon-star"></span>
-                        </li>
-                    </ul>
+                    <div py:if="len(user.location.feedback)>0" >
+                        <p>Ultimi feedback</p>
+                        <ul>
+                            <li py:for="rate in user.location.feedback[1].rates">
+                                <span>${rate[0]}</span>
+                                <span py:for="i in range(int(rate[1]))" class="glyphicon glyphicon-star"></span>
+                            </li>
+                        </ul></div>
                 </div>
                 <div class="col-md-3">
                     <div class="availability-container">

@@ -5,8 +5,8 @@ from ming.odm.declarative import MappedClass
 from session import DBSession
 
 
-FOOD_TYPES = ['Pasta', 'Carne', 'Pizza', 'Desert', 'Birra']
-LOCATION_PREFERENCES = ['Musica', 'Scambio Multiculturale', 'Fumatori']
+FOOD_TYPES = ['Primi', 'Carne', 'Pizza', 'Dessert', 'Pesce', 'Verdure']
+LOCATION_PREFERENCES = ['Musica', 'Scambio Culturale', 'Fumatori', 'Cena Multilingue']
 SPECIFIC_MEAL = ['Vegano', 'Celiaco', 'Vegetariano']
 HOURS = [i for i in range(24)]
 MINUTES = [i for i in range(60)]
