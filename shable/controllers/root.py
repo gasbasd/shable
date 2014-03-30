@@ -5,6 +5,7 @@ from tg import expose, flash, require, url, lurl, request, redirect, tmpl_contex
 from tg.i18n import ugettext as _, lazy_ugettext as l_
 from tg import predicates
 from shable import model
+from shable.controllers.search import SearchController
 from shable.controllers.secure import SecureController
 from tgext.admin.mongo import BootstrapTGMongoAdminConfig as TGAdminConfig
 from tgext.admin.controller import AdminController
@@ -36,6 +37,7 @@ class RootController(BaseController):
 
     error = ErrorController()
     user_profile = UserProfileController()
+    search = SearchController()
     view_meal = ViewMealController()
 
     def _before(self, *args, **kw):

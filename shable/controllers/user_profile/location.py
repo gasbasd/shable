@@ -3,7 +3,7 @@ from tg import expose, lurl, predicates, redirect, flash, request
 from tw2.forms import ListForm, TextField, SingleSelectField, SubmitButton, TextArea, CheckBoxList
 from shable.controllers.utils.temporary_photos import TemporaryPhotosUploader
 from shable.lib.base import BaseController
-from shable.lib.utils import json_lurl
+from shable.lib.utils import json_lurl, coordinate
 from shable.model.models import FOOD_TYPES, LOCATION_PREFERENCES
 import urllib, urllib2
 

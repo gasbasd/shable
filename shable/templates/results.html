@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<xi:include href="master.html" />
+
+<head>
+    <title>Mainpage home</title>
+    <style>
+        .bm-color {color: #003399;}
+        #map-canvas {
+        height: 400px;
+        width: 100%;
+        margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+        ${form.display(value=value)}
+</div>
+
+<div class="row">
+    <div id="map-canvas" class="span12"></div>
+</div>
+<script>
+
+  var points = ${geo_points_json};
+
+// <![CDATA[
+    function initialize() {
+      var mapOptions = {
+        zoom: 11,
+        center: new google.maps.LatLng(points[0][1], points[0][0])
+      };
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+
+      for (var i=0;i<points.length;i++) {
+        new google.maps.Marker({
+            position: new google.maps.LatLng(points[i][1], points[i][0]),
+            map: map
+        });
+      }
+    }
+
+    function loadScript() {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
+          'callback=initialize';
+      document.body.appendChild(script);
+    }
+
+    window.onload = loadScript;
+// ]]>
+
+</script>
+</body>
+</html>
