@@ -15,5 +15,11 @@ def coordinate(address):
     if address == "":
         address= "Roma"
     geolocator = GoogleV3()
-    address, (latitude, longitude) = geolocator.geocode(address)
+
+    try:
+        answer = geolocator.geocode(address)
+    except:
+        coordinate(address)
+
+    address, (latitude, longitude) = answer
     return [longitude, latitude]
