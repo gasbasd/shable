@@ -12,10 +12,11 @@ class SearchForm(ListForm):
 
     place = TextField(label='', placeholder='Dove', css_class='form-control shable-search-field',
                       container_attrs={'class': 'shable-search-field-container'})
-    when = CalendarDatePicker(label='', attrs=dict(placeholder="Quando"), css_class='form-control shable-search-field calendar-field',
+    when = CalendarDatePicker(label='', attrs=dict(placeholder="Quando"),
+                              css_class='form-control shable-search-field calendar-field',
                               container_attrs={'class': 'shable-search-field-container'})
     guests = SingleSelectField(label='', placeholder='#Ospiti', css_class='form-control shable-search-field',
-                               options = ["1","2","3","4","5","6"],
+                               options=["1","2","3","4","5","6"],
                                container_attrs={'class': 'shable-search-field-container'})
 
     submit = SubmitButton(value='Cerca', css_class='shable-search-submit')
@@ -25,10 +26,13 @@ class SearchForm(ListForm):
 class SearchResultForm(ListForm):
     css_class = 'shable-form'
 
-    place = TextField(label='', placeholder='Dove', css_class='form-control')
-    when = TextField(label='', placeholder='Quando', css_class='form-control')
+    place = TextField(label=None, placeholder='Dove', css_class='form-control')
+    when = CalendarDatePicker(label=None, attrs=dict(placeholder="Quando"),
+                              css_class='form-control calendar-field')
+    guests = SingleSelectField(label=None, css_class='form-control',
+                               options = ["Quanti","1","2","3","4","5","6"])
 
-    submit = None
+    submit = SubmitButton(value='Cerca', css_class='shable-detailed-search-submit')
     action = lurl('/search/results')
 
 
@@ -62,7 +66,6 @@ class SearchController(BaseController):
                                  'location.position': {'$geoWithin':
                                                   {'$centerSphere': [position, 10 / earth_radius_km] }} }).all()
 
-        flash("Query done")
         geo_points_json = []
         geo_points_json.append(position)
         for u in users:

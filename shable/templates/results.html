@@ -5,30 +5,86 @@
 <xi:include href="master.html"/>
 
 <head>
-    <title>Mainpage home</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/search.css')}" />
+    <title>Shable - Risultati Ricerca</title>
     <style>
         .bm-color {
             color: #003399;
         }
 
-        html, body, #map_canvas {
+        #map_canvas {
             height: 400px;
             width: 100%;
             margin-top: 30px;
+        }
+        .date_field_button{
+            z-index: 10;
+            right: -428px;
+            position: relative;
+            top: -26px;
+            width: 20px;
+            height: 20px;
+            color: transparent;
+            background-image: url("${tg.url('/img/Calendar.png')}");
+            background-size: cover;
+            background-position: center center;
+            border: none;
         }
 
     </style>
 </head>
 <body>
 <div class="row">
-    ${form.display(value=value)}
 </div>
 
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <!-- CHECK ELEMENT ID also UPDATE CSS -->
-<div id="map_canvas"></div>
-
+<div class="row">
+    <div class="col-md-6">
+        <div id="map_canvas"></div>
+    </div>
+    <div class="col-md-5 col-md-offset-1">
+        ${form.display(value=value)}
+    </div>
+</div>
+<br/>
+<py:for each="user in value">
+    <div py:for="meal in user.meals" class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="search-result-container">
+                <div class="col-md-3">
+                    <div class="search-result-meal-img" style="background-image: url('${h.meal_image(meal)}')"></div>
+                    <div class="search-result-user-img" style="background-image: url('${h.user_avatar(user)}')"></div>
+                </div>
+                <div class="col-md-4">
+                    <h2>${meal.name}</h2>
+                    <ul>
+                        <li><b>Giorno: </b>${h.format_date(meal.date)}</li>
+                        <li><b>Dalle: </b>${meal.start_time.hour}:${meal.start_time.minute}</li>
+                        <li><b>Alle: </b>${meal.end_time.hour}:${meal.start_time.minute}</li>
+                        <li><b>Indirizzo: </b>${user.location.address} ${user.location.number}, ${user.location.city}</li>
+                    </ul>
+                </div>
+                <div class="col-md-2" style="font-size: 12px; padding-top: 20px">
+                    <p>Ultimi feedback</p>
+                    <ul>
+                        <li py:for="rate in user.location.feedback[1].rates">
+                            <span>${rate[0]}</span>
+                            <span py:for="i in range(int(rate[1]))" class="glyphicon glyphicon-star"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <div class="availability-container">
+                        <p>${meal.availability}<span style="font-size: 15px;"><br/>posti disponibili</span></p></div>
+                    <div class="price-container">
+                        <p>${h.format_price(meal.price)} €<span style="font-size: 15px;"><br/>a persona</span></p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</py:for>
 <script>
     var points = ${geo_points_json};
     var description = ${geo_points_description};

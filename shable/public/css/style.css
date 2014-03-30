@@ -144,3 +144,22 @@ ul li{
     margin-left: 100px;
     color: #000000;
 }
+
+.tutorial-container{
+    background-color: rgba(115, 104, 86, 0.15);
+    padding:10px;
+    height:320px;
+}
+
+.tutorial-text{
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.tutorial-img {
+    background-position: top center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 200px;
+}
