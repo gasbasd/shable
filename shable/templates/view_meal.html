@@ -10,13 +10,13 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="deal_image" style="background-image: url('${h.meal_image(meal)}');"></div>
     </div>
-    <div class="col-md-5 col-md-offset-2">
-        <p>${meal.description}</p>
+    <div class="col-md-7 col-md-offset-1 container-background">
         <h2>IL MENÙ</h2>
         <p>${meal.menu}</p>
+        <p>${meal.description}</p>
         <ul>
             <li><b>Giorno: </b>${h.format_date(meal.date)}</li>
             <li><b>Dalle: </b>${meal.start_time.hour}:${meal.start_time.minute}</li>
@@ -25,11 +25,12 @@
             <li py:if="meal.specific_meal"><b>Cucina Specifica: </b>${meal.specific_meal}</li>
         </ul>
         ${form.display(value)}
-
+        <br/>
     </div>
 </div>
+<br/>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 container-background">
         <h2>LA TAVOLA</h2>
         <ul>
             <li><b>Indirizzo: </b>${user.location.address} ${user.location.number}, ${user.location.city}</li>
@@ -38,31 +39,44 @@
             <li><b>Descrizione Tavola: </b>${user.location.description}</li>
         </ul>
     </div>
-    <div class="col-md-2">
-        <div class="location-image" style="background-image: url('${h.location_image(user)}');"></div>
-    </div>
-    <div class="col-md-3 col-md-offset-1">
-        <h2>${h.genderized(user)}</h2>
-        <ul>
-            <li>${user.display_name}</li>
-            <li><b>Preferenze Alimentari: </b>
-                <span py:for="food in user.location.food_types">${food} - </span></li>
-        </ul>
-
-    </div>
-    <div class="col-md-2">
-        <div class="user-image" style="background-image: url('${h.user_avatar(user)}');"></div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <h2 style="text-align: center; width: 100%;">FEEDBACK</h2>
-        <div py:for="feed in user.location.feedback" style="height: 300px">
+    <div class="col-md-7 col-md-offset-1 container-background" style="padding-top: 5px;">
+        <div class="col-md-5 col-md-offset-1">
+            <div class="user-image" style="background-image: url('${h.user_avatar(user)}');"></div>
+        </div>
+        <div class="col-md-5 col-md-offset-1 ">
+            <h2>${h.genderized(user)}</h2>
             <ul>
-                <li py:for="k, v in feed.rates"></li>
+                <li>${user.display_name}</li>
+                <li><b>Preferenze Alimentari: </b>
+                    <span py:for="food in user.location.food_types">${food} - </span></li>
             </ul>
-            <p>${feed.comment}</p>
-            <p style="width: 100%; text-align: right;">${feed.user}</p>
+
+        </div>
+
+        <div class="col-md-12">
+            <h2 style="text-align: center; width: 100%;">FEEDBACK</h2>
+            <div py:for="feed in user.location.feedback" style="height: 120px">
+                <div class="container-background"  style="height: 92%;width: 100%;padding-top: 5px;">
+                    <div class="col-md-3">
+                        <ul>
+                            <li py:for="rate in feed.rates">${rate[0]}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                        <ul>
+                            <li py:for="rate in feed.rates">
+                                <span py:for="i in range(int(rate[1]))" class="glyphicon glyphicon-star"></span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="feedback-image" style="background-image: url('${feed.user_avatar}');"></div>
+                    </div>
+                    <div class="col-md-5">
+                        <p>${feed.comment}</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

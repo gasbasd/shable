@@ -8,13 +8,17 @@ import json
 
 
 class SearchForm(ListForm):
-    css_class = 'shable-form'
+    css_class = 'shable-form search-form'
 
-    place = TextField(label='', placeholder='Dove', css_class='form-control')
-    when = CalendarDatePicker(label='', placeholder='Quando', css_class='form-control')
-    guests = SingleSelectField(label='', placeholder='#Ospiti', css_class='form-control', options = ["1","2","3","4","5","6"])
+    place = TextField(label='', placeholder='Dove', css_class='form-control shable-search-field',
+                      container_attrs={'class': 'shable-search-field-container'})
+    when = CalendarDatePicker(label='', attrs=dict(placeholder="Quando"), css_class='form-control shable-search-field calendar-field',
+                              container_attrs={'class': 'shable-search-field-container'})
+    guests = SingleSelectField(label='', placeholder='#Ospiti', css_class='form-control shable-search-field',
+                               options = ["1","2","3","4","5","6"],
+                               container_attrs={'class': 'shable-search-field-container'})
 
-    submit = SubmitButton(value='Cerca', css_class='form-control')
+    submit = SubmitButton(value='Cerca', css_class='shable-search-submit')
     action = lurl('/search/query')
 
 
@@ -32,7 +36,6 @@ class SearchController(BaseController):
 
     @expose('shable.templates.search')
     def index(self):
-
         return {'form': SearchForm, 'value': {}}
 
 

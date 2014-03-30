@@ -42,7 +42,8 @@ install_requires=[
     "tgext.admin >= 0.6.1",
     "formencode>=1.3.0a1",
     "tgext.datahelpers",
-    "axf"
+    "axf",
+    "geopy"
     ]
 
 setup(

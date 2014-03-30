@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from bson import ObjectId
 
 from tg import request, expose, redirect, lurl
+import tg
 from tw2.forms import HiddenField, SingleSelectField, SubmitButton, ListForm, TextArea
 from shable import model
 from shable.lib.base import BaseController
@@ -40,7 +41,12 @@ class PastMealsController(BaseController):
         meal = model.Meal.query.get(_id=ObjectId(kw.pop('meal_id')))
         user = model.User.query.get(_id=meal.user_id)
         buyer = request.identity['user']
-        feed = {'user': buyer.display_name, 'comment': kw.pop('comment'), 'rates': [{k: v} for k, v in kw.iteritems()]}
+        feed = {'user': buyer.display_name, 'comment': kw.pop('comment'), 'user_avatar': tg.url(buyer.avatar[0].url),
+                'rates': [('Pulizia', kw['cleaning']),
+                          ('Qualità del cibo', kw['food_quality']),
+                          ('Cordialità', kw['cordiality']),
+                          ('Puntualità', kw['punctuality']),
+                          ('Socialità', kw['sociality']),]}
         user.location.feedback.append(feed)
         redirect('/user_profile/past_meals')
 

@@ -1,6 +1,7 @@
 .user-profile-avatar{
     height: 180px;
     width: 180px;
+    border-radius: 90px;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;

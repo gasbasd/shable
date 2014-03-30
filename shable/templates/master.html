@@ -14,7 +14,7 @@
     <script src="${tg.url('/javascript/Ractive.min.js')}"></script>
 </head>
 
-<body py:match="body" py:attrs="select('@*')">
+<body py:match="body" py:attrs="select('@*')" style="background-color: #F9F5BC !important;">
 <!-- Navbar -->
 <nav class="navbar navbar-default">
     <div class="navbar-header">
@@ -25,23 +25,16 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="${tg.url('/')}">
-            <img src="${tg.url('/img/turbogears_logo.png')}" height="20" alt="TurboGears 2"/>
-            ${getattr(tmpl_context, 'project_name', 'turbogears2')}
+            <img src="${tg.url('/img/LOGO-SHABLExx.png')}" height="40" alt="Shable"/>
         </a>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-content">
-        <ul class="nav navbar-nav">
-            <li class="${('', 'active')[value_of('page') == 'index']}"><a href="${tg.url('/')}">Welcome</a></li>
-            <li class="${('', 'active')[value_of('page') == 'about']}"><a href="${tg.url('/about')}">About</a></li>
-            <li class="${('', 'active')[value_of('page') == 'data']}"><a href="${tg.url('/data')}">Serving Data</a></li>
-            <li class="${('', 'active')[value_of('page') == 'environ']}"><a href="${tg.url('/environ')}">WSGI Environment</a></li>
-        </ul>
-
         <ul py:if="tg.auth_stack_enabled" class="nav navbar-nav navbar-right">
-            <li py:if="not request.identity"><a href="${tg.url('/login')}">Login</a></li>
-            <li py:if="request.identity"><a href="${tg.url('/logout_handler')}">Logout</a></li>
-            <li py:if="request.identity"><a href="${tg.url('/admin')}">Admin</a></li>
+            <li py:if="not request.identity"><a class="header-links" href="${tg.url('/login')}">Login</a></li>
+            <li py:if="request.identity"><div class="header-avatar" style="background-image: url('${h.user_avatar()}')"/></li>
+            <li py:if="request.identity"><a class="header-links" href="${tg.url('/user_profile')}">${h.user_info().display_name}</a></li>
+            <li py:if="request.identity"><a class="header-links" href="${tg.url('/logout_handler')}">Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -55,7 +48,6 @@
             </div>
         </div>
     </py:with>
-
     <!-- Main included content -->
     <div py:replace="select('*|text()')"/>
 </div>
@@ -63,8 +55,7 @@
 
 <!-- Footer -->
 <footer class="footer hidden-xs hidden-sm">
-    <a class="pull-right" href="http://www.turbogears.org"><img style="vertical-align:middle;" src="${tg.url('/img/under_the_hood_blue.png')}" alt="TurboGears 2" /></a>
-    <p>Copyright &copy; ${getattr(tmpl_context, 'project_name', 'TurboGears2')} ${h.current_year()}</p>
+    <p>Copyright &copy; Shable ${h.current_year()}</p>
 </footer>
 
 <script src="http://code.jquery.com/jquery.js"></script>

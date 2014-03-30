@@ -29,7 +29,7 @@
             </tr>
             <py:for each="meal in meals">
                 <tr>
-                    <td>${meal.name}</td>
+                    <td><a href="${tg.url('/view_meal', params={'id':str(meal._id)})}">${meal.name}</a></td>
                     <td style="width: 100px">
                         <ul>
                             <li><a href="${tg.url('/user_profile/meals/delete',

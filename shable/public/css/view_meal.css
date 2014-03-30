@@ -1,14 +1,14 @@
 .deal_image{
-    height: 500px;
-    width: 500px;
+    height: 380px;
+    width: 380px;
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
 .location-image {
-    height: 180px;
-    width: 180px;
+    height: 380px;
+    width: 380px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,6 +17,15 @@
 .user-image {
     height: 180px;
     width: 180px;
+    border-radius: 90px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.feedback-image{
+    height: 90px;
+    width: 90px;
+    border-radius: 45px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -24,4 +33,10 @@
 
 ul {
     padding-left: 0px;
+}
+
+.container-background{
+    background-color: rgba(115, 104, 86, 0.15);
+    border-radius: 8px;
+    border:1px solid #3e2d21;;
 }
