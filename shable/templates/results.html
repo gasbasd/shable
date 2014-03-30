@@ -2,60 +2,71 @@
       xmlns:py="http://genshi.edgewall.org/"
       xmlns:xi="http://www.w3.org/2001/XInclude">
 
-<xi:include href="master.html" />
+<xi:include href="master.html"/>
 
 <head>
     <title>Mainpage home</title>
     <style>
-        .bm-color {color: #003399;}
-        #map-canvas {
-        height: 400px;
-        width: 100%;
-        margin-top: 30px;
+        .bm-color {
+            color: #003399;
         }
+
+        html, body, #map_canvas {
+            height: 400px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
     </style>
 </head>
 <body>
 <div class="row">
-        ${form.display(value=value)}
+    ${form.display(value=value)}
 </div>
 
-<div class="row">
-    <div id="map-canvas" class="span12"></div>
-</div>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<!-- CHECK ELEMENT ID also UPDATE CSS -->
+<div id="map_canvas"></div>
+
 <script>
+    var points = ${geo_points_json};
+    var description = ${geo_points_description};
 
-  var points = ${geo_points_json};
+    // <![CDATA[
+    var map;
 
-// <![CDATA[
     function initialize() {
-      var mapOptions = {
-        zoom: 11,
-        center: new google.maps.LatLng(points[0][1], points[0][0])
-      };
+        var mapOptions = { center: new google.maps.LatLng(points[0][1], points[0][0]),
+            zoom: 14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP };
+        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-      var map = new google.maps.Map(document.getElementById('map-canvas'),
-          mapOptions);
+        var markers = [];
 
-      for (var i=1;i<points.length;i++) {
-        new google.maps.Marker({
-            position: new google.maps.LatLng(points[i][1], points[i][0]),
-            map: map
+        var infowindow = new google.maps.InfoWindow();
+
+        for (var i = 1; i < points.length; i++) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(points[i][1], points[i][0]),
+                map: map
+            });
+
+            makeInfoWindowEvent(map, infowindow, description[i], marker);
+
+            markers.push(marker);
+        }
+
+    }
+
+    function makeInfoWindowEvent(map, infowindow, contentString, marker) {
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.setContent(contentString);
+            infowindow.open(map, marker);
         });
-      }
     }
-
-    function loadScript() {
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
-          'callback=initialize';
-      document.body.appendChild(script);
-    }
-
-    window.onload = loadScript;
-// ]]>
-
+    google.maps.event.addDomListener(window, 'load', initialize);
+    // ]]>
 </script>
 </body>
 </html>
