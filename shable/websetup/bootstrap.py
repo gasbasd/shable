@@ -34,12 +34,26 @@ def bootstrap(command, conf, vars):
     u1.email_address = 'gas@shable.co'
     u1.password = '123'
 
-    u1 = model.User()
-    u1.user_name = 'user'
-    u1.name = 'Example'
-    u1.surname = 'User'
-    u1.email_address = 'user@shable.co'
-    u1.password = '123'
+    u2 = model.User()
+    u2.user_name = 'user1'
+    u2.name = 'Mario'
+    u2.surname = 'Rossi'
+    u2.email_address = 'user1@shable.co'
+    u2.password = '123'
+
+    u3 = model.User()
+    u3.user_name = 'user2'
+    u3.name = 'Giuseppe'
+    u3.surname = 'Bianchi'
+    u3.email_address = 'user2@shable.co'
+    u3.password = '123'
+
+    u4 = model.User()
+    u4.user_name = 'user3'
+    u4.name = 'Carlo'
+    u4.surname = 'Esposito'
+    u4.email_address = 'user3@shable.co'
+    u4.password = '123'
 
 
     model.DBSession.flush()
