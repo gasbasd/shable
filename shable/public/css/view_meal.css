@@ -5,3 +5,23 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+.location-image {
+    height: 180px;
+    width: 180px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.user-image {
+    height: 180px;
+    width: 180px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+ul {
+    padding-left: 0px;
+}

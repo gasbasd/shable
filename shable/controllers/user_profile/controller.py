@@ -6,6 +6,7 @@ from tg import predicates, expose, lurl, redirect, request, flash
 from tw2.forms import TableForm, ListForm, TextField, SingleSelectField, SubmitButton
 from shable.controllers.user_profile.location import LocationProfileController
 from shable.controllers.user_profile.meals import ManageMealsController
+from shable.controllers.user_profile.my_meals import PastMealsController
 from shable.controllers.utils.temporary_photos import TemporaryPhotosUploader
 from shable.lib.base import BaseController
 from shable.lib.utils import json_lurl
@@ -28,6 +29,7 @@ class UserProfileController(BaseController):
     allow_only = predicates.not_anonymous()
     location = LocationProfileController()
     meals = ManageMealsController()
+    past_meals = PastMealsController()
 
     photos = TemporaryPhotosUploader()
 

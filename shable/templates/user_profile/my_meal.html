@@ -7,7 +7,7 @@
 <head>
     <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/photo_upload.css')}" />
     <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/user_profile.css')}" />
-    <title>Shable - Gestione Pasti</title>
+    <title>Shable - Pasti Passati</title>
 </head>
 <body>
 <div class="row">
@@ -21,21 +21,21 @@
         <div></div>
     </div>
     <div class="col-md-6">
-        <div class="btn-block"><a href="${tg.url('/user_profile/meals/new')}">Nuovo Pasto</a></div>
         <table class="table table-bordered recap-table">
             <tr>
                 <th>Pasto</th>
-                <th class="edit-header">Elimina</th>
+                <th>Data</th>
+                <th class="edit-header" style="width: 120px">Lascia un feedback</th>
             </tr>
             <py:for each="meal in meals">
                 <tr>
-                    <td>${meal.name}</td>
-                    <td style="width: 100px">
+                    <td><a href="${tg.url('/view_meal', params={'id':str(meal._id)})}">${meal.name}</a></td>
+                    <td>${h.format_date(meal.date)}</td>
+                    <td style="width: 120px">
                         <ul>
-                            <li><a href="${tg.url('/user_profile/meals/delete',
-                                 params=dict(meal_id=meal._id))}"
-                                   onclick="return confirm('Procedere alla cancellazione?')" title="Elimina Pasto">
-                                <span class="glyphicon glyphicon-trash"></span></a>
+                            <li><a href="${tg.url('/user_profile/past_meals/leave_feedback',
+                                 params=dict(meal_id=meal._id))}">
+                                <span class="glyphicon glyphicon-star-empty"></span></a>
                             </li>
                         </ul>
                     </td>

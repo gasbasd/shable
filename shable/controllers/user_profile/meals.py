@@ -70,5 +70,4 @@ class ManageMealsController(BaseController):
         values['end_time'] = end_time
         meal = models.Meal(**values)
         user._meals.append(meal._id)
-
         redirect('/user_profile/meals')

@@ -15,13 +15,55 @@
     </div>
     <div class="col-md-5 col-md-offset-2">
         <p>${meal.description}</p>
-        <h2>MENÙ</h2>
+        <h2>IL MENÙ</h2>
         <p>${meal.menu}</p>
+        <ul>
+            <li><b>Giorno: </b>${h.format_date(meal.date)}</li>
+            <li><b>Dalle: </b>${meal.start_time.hour}:${meal.start_time.minute}</li>
+            <li><b>Alle: </b>${meal.end_time.hour}:${meal.start_time.minute}</li>
+            <li><b>Prezzo: </b>${h.format_price(meal.price)} €</li>
+            <li py:if="meal.specific_meal"><b>Cucina Specifica: </b>${meal.specific_meal}</li>
+        </ul>
+        ${form.display(value)}
+
     </div>
 </div>
 <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-4">
+        <h2>LA TAVOLA</h2>
+        <ul>
+            <li><b>Indirizzo: </b>${user.location.address} ${user.location.number}, ${user.location.city}</li>
+            <li><b>Comportamenti a Tavola: </b>
+                <span py:for="pref in user.location.preferences">${pref} - </span></li>
+            <li><b>Descrizione Tavola: </b>${user.location.description}</li>
+        </ul>
+    </div>
+    <div class="col-md-2">
+        <div class="location-image" style="background-image: url('${h.location_image(user)}');"></div>
+    </div>
+    <div class="col-md-3 col-md-offset-1">
+        <h2>${h.genderized(user)}</h2>
+        <ul>
+            <li>${user.display_name}</li>
+            <li><b>Preferenze Alimentari: </b>
+                <span py:for="food in user.location.food_types">${food} - </span></li>
+        </ul>
 
+    </div>
+    <div class="col-md-2">
+        <div class="user-image" style="background-image: url('${h.user_avatar(user)}');"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2 style="text-align: center; width: 100%;">FEEDBACK</h2>
+        <div py:for="feed in user.location.feedback" style="height: 300px">
+            <ul>
+                <li py:for="k, v in feed.rates"></li>
+            </ul>
+            <p>${feed.comment}</p>
+            <p style="width: 100%; text-align: right;">${feed.user}</p>
+        </div>
     </div>
 </div>
 </body>

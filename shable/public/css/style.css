@@ -41,7 +41,7 @@
     color: #555;
 }
 
-.shable-form ul li{
+ul li{
     list-style: none;
 }
 
@@ -51,4 +51,8 @@
 
 .chbx-list{
     padding-left: 20px !important;
+}
+
+.small-single-select{
+    width: 75px !important;
 }

@@ -112,13 +112,7 @@ class User(MappedClass):
         'photos': [],
         'food_types': [],
         'preferences': [],
-        'feedback': [{
-            'comment': s.String(),
-            'rates': [{
-                'name': s.String(),
-                'rate': s.Int()
-            }]
-        }],
+        'feedback': s.Anything(if_missing=[]),
         'details': s.Anything(),
         'position': [s.Float()],
     })
@@ -133,6 +127,7 @@ class User(MappedClass):
     _meals = ForeignIdProperty(Meal, uselist=True)
     meals = RelationProperty(Meal)
     details = FieldProperty(s.Anything)
+    my_meals = FieldProperty(s.Anything, if_missing=[])
 
     @property
     def display_name(self):
