@@ -51,20 +51,20 @@ class SearchController(BaseController):
             eater = int(kw.get('guests'))
         else:
             eater = 1
-        search_results = [u.user_id for u in Meal.query.find({'availability':{'$gte': eater},'date' :{'$gte': date} }).all()]
+        search_results = [u.user_id for u in Meal.query.find({'availability':{'$gte': eater},
+                                                              'date' :{'$lte': date, '$gte': datetime.datetime.utcnow()} }).all()]
 
         users = User.query.find({'_id': {'$in': search_results},
-                                 'position': {'$geoWithin':
+                                 'location.position': {'$geoWithin':
                                                   {'$centerSphere': [position, 10 / earth_radius_km] }} }).all()
 
         flash("Query done")
-        print  users
+        print  "users ",users
+        print "POSITION from query search", position
         geo_points_json = []
         geo_points_json.append(position)
-        geo_points_json = []#[ u.location.position for u in users ]
-
-        geo_points_json.append([ 7, 43])
-        geo_points_json.append([7.33, 43.33])
+        for u in users:
+            geo_points_json.append(u.location.position)
 
         return dict(form=SearchResultForm, value= users, geo_points_json=json.dumps(geo_points_json))
 
